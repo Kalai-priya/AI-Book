@@ -1,0 +1,41 @@
+import type { Metadata } from "next";
+import { Inter, IBM_Plex_Serif } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+
+import Navbar from "@/components/Navbar";
+import "./globals.css";
+import { Toaster } from "sonner";
+
+const ibmPlexSerif = IBM_Plex_Serif({
+    variable: "--font-ibm-plex-serif",
+    subsets: ['latin'],
+    weight: ['400', '500', '600', '700'],
+    display: 'swap'
+});
+
+
+
+export const metadata: Metadata = {
+  title: "Bookified",
+  description: "Transform your books into interactive AI conversations. Upload PDFs, and chat with your books using voice.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <ClerkProvider>
+        <html lang="en">
+          <body
+            className={`${ibmPlexSerif.variable} relative font-sans antialiased`}
+          >
+            <Navbar />
+            {children}
+            <Toaster />
+          </body>
+        </html>
+    </ClerkProvider>
+  );
+}
